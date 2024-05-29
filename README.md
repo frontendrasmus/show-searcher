@@ -4,8 +4,8 @@ This document outline how you can install the needed dependencies for the app, h
 
 ## Installing dependencies
 
-Download and Install node latest LTS from [title](https://nodejs.org/en)
-open a terminal of choice, and type the following.
+1. Download and Install node latest LTS from [node](https://nodejs.org/en). the project is built using Node 20 for running npm scripts etc.
+2. Open a terminal of choice, and type the following.
 
 ``` shell script bash/zsh and similar
 npm run i
@@ -13,8 +13,18 @@ npm run i
 
 ## Starting the application
 
+Starting a local web server with react-refresh hot module reloading.
+
 ``` shell script bash/zsh and similar
-npm run start
+npm run dev
+```
+
+## Building the application
+
+Will create a bundle ready for production.
+
+``` shell script bash/zsh and similar
+npm run build
 ```
 
 ## Testing the application
@@ -26,7 +36,6 @@ npm run test
 ## What could have been improved in this app given more time than 5h?
 
 
-
 ## Contact and questions?
 
-IF you have any questions regarding the code, dont hesitate to contant rasmus.ablad@kvadrat.se and lets discuss your questions.
+IF you have any questions regarding the code or choices made, please contact [rasmus.ablad@kvadrat.se](rasmus.ablad@kvadrat.se).
