@@ -7,7 +7,6 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
-  font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -69,13 +68,14 @@ button:focus-visible {
   height: 100vh;
   text-align: center;
   width: 100vw;
+  background-color: whitesmoke;
 }
 
 /* Optional: Add some padding and shadow for the content box */
 .content {
   padding: 2em;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+
 }
 
 
