@@ -1,23 +1,20 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SearchView from './views/SearchView';
+import ShowDetailView from './views/ShowDetailView';
+import BaseLayout from './layouts/BaseLayout';
 
-function App() {
-  const [searchQuery, setSearchQuery] = useState<string>('');
-
-  useEffect(() => {
-    console.log(searchQuery);
-  }, [searchQuery]);
-
+const App: React.FC = () => {
   return (
-    <>
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search for TV show by typing its name..."
-      />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<BaseLayout />}>
+          <Route index element={<SearchView />} />
+          <Route path="/show/:id" element={<ShowDetailView />} />
+        </Route>
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
