@@ -1,20 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IShowSearchResult } from '../types';
+import { List, ListItem, ListItemText } from '@mui/material';
 
 interface IResultsListProps {
   results: IShowSearchResult[];
 }
 
+// results.map((result, index) => (
+// <div key={index}>
+//   <Link to={`/show/${result.show.id}`}>{result.show.name}</Link>
+// </div>
 const ResultsList: React.FC<IResultsListProps> = ({ results }) => {
+  const navigate = useNavigate();
   return (
-    <div>
+    <List style={{ height: '600px' }} dense>
       {results.map((result, index) => (
-        <div key={index}>
-          <Link to={`/show/${result.show.id}`}>{result.show.name}</Link>
-        </div>
+        <ListItem key={`${result.show.name}__${index}`}>
+          <ListItemText
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate(`/show/${result.show.id}`)}
+            primary={result.show.name}
+            secondary={result.show.genres}
+          />
+        </ListItem>
       ))}
-    </div>
+    </List>
   );
 };
 

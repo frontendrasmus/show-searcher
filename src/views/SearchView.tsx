@@ -4,10 +4,13 @@ import ResultsList from '../components/ResultsList';
 import { IShowSearchResult } from '../types';
 import SearchBox from '../components/SearchBox';
 import { TV_MAZE_API_FUZZY_SEARCH_URL } from '../constants/api-constants';
-import { Container, Grid, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const SearchPage: React.FC = () => {
   const [results, setResults] = useState<IShowSearchResult[]>([]);
+  const theme = useTheme();
+  const matchesMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   const handleSearch = (newQuery: string) => {
     axios
@@ -21,22 +24,31 @@ const SearchPage: React.FC = () => {
       });
   };
 
+  const searchHeaderText = 'The Search Tv Ap2';
+
   return (
-    <Container maxWidth="lg">
-      <Grid spacing={2}>
-        <Grid xs={12} md={8}>
-          <Typography color="#646cff" variant="h1" gutterBottom>
-            Search Tv Show
-          </Typography>
+    <Box>
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={12}>
+          <Stack spacing={2}>
+            {matchesMdUp ? (
+              <Typography color="black" variant="h1">
+                {searchHeaderText}
+              </Typography>
+            ) : (
+              <Typography color="black" variant="h1" fontSize={24}>
+                {searchHeaderText}
+              </Typography>
+            )}
+            <SearchBox onSearch={handleSearch} />
+          </Stack>
         </Grid>
-        <Grid xs={12} md={8}>
-          <SearchBox onSearch={handleSearch} />
-        </Grid>
-        <Grid xs={12} md={8}>
+
+        <Grid item xs={12}>
           <ResultsList results={results} />
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 

@@ -31,6 +31,8 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  justify-content: center;
+  background: white;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -59,25 +61,6 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
-/* Center the content using Flexbox */
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  width: 100vw;
-  background-color: whitesmoke;
-}
-
-/* Optional: Add some padding and shadow for the content box */
-.content {
-  padding: 2em;
-  border-radius: 8px;
-
-}
-
 
 @media (prefers-color-scheme: light) {
   :root {

@@ -1,5 +1,5 @@
-import { Button, Grid, Stack, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Stack, TextField } from '@mui/material';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -7,6 +7,23 @@ interface SearchBarProps {
 
 const SearchBox: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState<string>('');
+  const [debouncedQuery, setDebouncedQuery] = useState<string>(query);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 200);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [query]);
+
+  useEffect(() => {
+    if (query === debouncedQuery) {
+      onSearch(query);
+    }
+  }, [debouncedQuery, query, onSearch]);
 
   const handleSearch = () => {
     onSearch(query);
@@ -24,25 +41,12 @@ const SearchBox: React.FC<SearchBarProps> = ({ onSearch }) => {
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             handleSearch();
-          } else if (e.key === 'Backspace') {
-            console.log('backspace');
-            handleSearch();
           }
         }}
         size="medium"
         fullWidth
         placeholder="Enter the name of the series here."
       />
-
-      <Button
-        variant="contained"
-        size="large"
-        onKeyDown={(e) => (e.key === 'Enter' ? handleSearch : '')}
-        onClick={handleSearch}
-        className="search-button"
-      >
-        Search
-      </Button>
     </Stack>
   );
 };
