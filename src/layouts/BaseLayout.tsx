@@ -8,8 +8,15 @@ function BaseLayout() {
       <Box
         sx={{
           width: '100vw',
-          height: 'calc(100vh)',
+          overflow: 'hidden',
+          height: {
+            xs: '90vh',
+            md: '100vh',
+          },
           paddingTop: '2em',
+          paddingBottom: {
+            xs: '2em',
+          },
           display: 'flex',
           justifyContent: 'flex-start',
           alignItems: 'flex-start',
@@ -23,7 +30,17 @@ function BaseLayout() {
               xs: 'calc(100vw - 40px)',
               md: '600px',
             },
-            minHeight: 'calc(100vh - 4em)',
+            minHeight: {
+              xs: 'calc(100vh - 12em)',
+              md: 'calc(100vh - 4em)',
+            },
+            maxHeight: {
+              xs: '700px',
+              md: 'calc(100vh - 4em)',
+            },
+            overflow: {
+              xs: 'scroll',
+            },
             width: '100%',
             p: 2,
             boxShadow: 3,

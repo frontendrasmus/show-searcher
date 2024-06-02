@@ -32,7 +32,7 @@ body {
   display: flex;
   place-items: center;
   justify-content: center;
-  background: #3f6e63;
+  background: #3f6e63!important;
   min-width: 320px;
   min-height: 100vh;
 }
