@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Box, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ResultsList from '../components/ResultsList';
 import SearchBox from '../components/SearchBox';
-import { fetchShows } from '../api/show-api';
+import { fetchShows } from '../api/api-calls';
 
 const SearchView: React.FC = () => {
   const [query, setQuery] = useState<string>('');
+  const queryClient = useQueryClient();
   const theme = useTheme();
   const matchesMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
-  const { isPending, error, data } = useQuery({
+  const { isPending, isFetching, error, data } = useQuery({
     queryKey: ['shows', query],
-    queryFn: () => fetchShows(query),
+    queryFn: () => {
+      const showsResult = fetchShows(query);
+      return showsResult ?? null;
+    },
+    enabled: !!query,
   });
 
+  console.log(isPending, isFetching);
+
   const handleSearch = (newQuery: string) => {
+    console.log('handleSearch');
     setQuery(newQuery);
   };
 
@@ -40,12 +48,12 @@ const SearchView: React.FC = () => {
           </Stack>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} minHeight={600}>
           {error ? (
-            <Typography color="error">An error occurred: {error.message}</Typography>
-          ) : (
-            <ResultsList results={data || []} pending={isPending} />
-          )}
+            <Typography color="error">An error occurred</Typography>
+          ) : data || (isFetching && isPending) ? (
+            <ResultsList results={data} isBusy={isPending} />
+          ) : null}
         </Grid>
       </Grid>
     </Box>

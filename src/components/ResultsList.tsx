@@ -5,13 +5,14 @@ import { List, ListItem, ListItemText, Skeleton, Stack, Typography } from '@mui/
 
 interface IResultsListProps {
   results: IShowSearchResult[] | [];
-  pending: boolean;
+  isBusy: boolean;
 }
 
-const ResultsList: React.FC<IResultsListProps> = ({ results, pending = false }) => {
+const ResultsList: React.FC<IResultsListProps> = ({ results, isBusy = false }) => {
   const navigate = useNavigate();
   return (
-    <List style={{ height: '600px' }} dense>
+    <List dense>
+      {!results?.length && !isBusy && <p>Seems like you have not tested the search yet? Why dont you try 'House'</p>}
       {results?.map((result, index) => (
         <ListItem key={`${result.show.name}__${index}`}>
           <ListItemText
@@ -24,20 +25,20 @@ const ResultsList: React.FC<IResultsListProps> = ({ results, pending = false }) 
           />
         </ListItem>
       ))}
-      {pending ? (
+      {isBusy && (
         <Stack spacing={2}>
           <Typography color="black" variant="h3" fontSize={18}>
             Laddar tv serie... ha tålamod
           </Typography>
-          <Skeleton variant="rectangular" height={24} />
-          <Skeleton variant="rectangular" height={24} />
-          <Skeleton variant="rectangular" height={24} />
-          <Skeleton variant="rectangular" height={24} />
-          <Skeleton variant="rectangular" height={24} />
-          <Skeleton variant="rectangular" height={24} />
-          <Skeleton variant="rectangular" height={24} />
+          <Skeleton role="alert" variant="rectangular" height={24} />
+          <Skeleton role="alert" variant="rectangular" height={24} />
+          <Skeleton role="alert" variant="rectangular" height={24} />
+          <Skeleton role="alert" variant="rectangular" height={24} />
+          <Skeleton role="alert" variant="rectangular" height={24} />
+          <Skeleton role="alert" variant="rectangular" height={24} />
+          <Skeleton role="alert" variant="rectangular" height={24} />
         </Stack>
-      ) : null}
+      )}
     </List>
   );
 };

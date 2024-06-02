@@ -21,6 +21,7 @@ const SearchBox: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   useEffect(() => {
     if (query === debouncedQuery) {
+      console.log('q', query);
       onSearch(query);
     }
   }, [debouncedQuery, query, onSearch]);

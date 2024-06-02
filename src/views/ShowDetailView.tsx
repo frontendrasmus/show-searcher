@@ -1,32 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { IShow } from '../types';
-import { TV_MAZE_API_SINGLE_SEARCH_URL } from '../constants/api-constants';
-import { Button } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
+import { fetchShowDetail } from '../api/api-calls';
+import { useQuery } from '@tanstack/react-query';
 
 const ShowDetailView: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [show, setShow] = useState<IShow | null>(null);
 
-  useEffect(() => {
-    axios.get(`${TV_MAZE_API_SINGLE_SEARCH_URL}/${id}`).then((response) => {
-      setShow(response.data);
-    });
-  }, [id]);
+  const { isPending, error, data } = useQuery({
+    queryKey: ['show-detail', id],
+    queryFn: () => {
+      const showResult = fetchShowDetail(id as string);
+      return showResult ?? null;
+    },
+    enabled: !!id,
+  });
 
-  if (!id) return <div>View is missing a param of 'id' in its path, please use /show/id</div>;
+  if (isPending) {
+    return (
+      <Box>
+        <Grid container spacing={2} justifyContent="center">
+          <CircularProgress />
+        </Grid>
+      </Box>
+    );
+  }
 
-  if (!show) return <div>Loading...</div>;
+  if (error) {
+    return (
+      <Box>
+        <Grid container spacing={2} justifyContent="center">
+          <Typography color="error">{error.message}</Typography>
+        </Grid>
+      </Box>
+    );
+  }
 
   return (
-    <div>
-      <Button onClick={() => navigate(-1)}>Go back</Button>
-      <h1>{show.name}</h1>
-      {show.image && <img src={show.image.medium} alt={show.name} />}
-      <p dangerouslySetInnerHTML={{ __html: show.summary || '' }} />
-    </div>
+    <Box>
+      <Grid container spacing={2} justifyContent="center">
+        <Button onClick={() => navigate(-1)}>Go back</Button>
+        <h1>{data.name}</h1>
+        {data.image && <img src={data.image.medium} alt={data.name} />}
+        <p dangerouslySetInnerHTML={{ __html: data.summary || '' }} />
+        <p>{data.language}</p>
+      </Grid>
+    </Box>
   );
 };
 
