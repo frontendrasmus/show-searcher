@@ -41,7 +41,7 @@ npm test
 
 ## Contact and questions?
 
-IF you have any questions regarding the code or choices made, please contact [rasmus.ablad@kvadrat.se](rasmus.ablad@kvadrat.se).
+IF you have any questions regarding the code or choices made, please contact me here on github.
 
 ## Further improvements if i had more time
 
