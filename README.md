@@ -39,10 +39,6 @@ npm test
 
 ## What could have been improved in this app given more time than 5h?
 
-## Contact and questions?
-
-IF you have any questions regarding the code or choices made, please contact me here on github.
-
 ## Further improvements if i had more time
 
 1. Better handling of the actual detail of the TV series, not im just doing a id search in the /shows/id endpoint. There was IMDB ids etc that i could have used for more robust and up to date info on the tv series. This could have been indicated at the search level for the user to know that the specific search in ins IMDB. This would have been perfect for an embedding. IF no IMDB or other TV db data exists i would have used TV maze info, then if no info at all show a message, "no more details regarding this series". Another solution would have been to indicate this directly in the search.
