@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { act, cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -95,12 +95,17 @@ describe('SearchView', () => {
 
   it('displays an error message when the fetch fails', async () => {
     mockedAxios.get.mockResolvedValueOnce(new Error('An little error happened.'));
-
+    jest.useFakeTimers();
     renderWithProviders(<SearchView />);
 
     await waitFor(() => userEvent.type(screen.getByLabelText(/search tv show/i), 'House'));
-
-    await waitFor(() => expect(screen.getByText(/Something went wrong, details for support/i)).toBeInTheDocument());
+    act(() => {
+      jest.advanceTimersByTime(300);
+    });
+    await waitFor(() => {
+      const errorElement = screen.getByText(/Something went wrong, details for support/i);
+      expect(errorElement).toBeInTheDocument();
+    });
   });
 
   it('displays initial search input', async () => {
@@ -110,12 +115,19 @@ describe('SearchView', () => {
 
   it('displays loading text while fetching data', async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: searchResultMockItem });
-
+    jest.useFakeTimers();
     renderWithProviders(<SearchView />);
 
     userEvent.type(screen.getByLabelText(/search tv show/i), 'House');
 
-    await waitFor(() => expect(screen.getByText(/Loading results from Tv Maze/i)).toBeInTheDocument());
+    act(() => {
+      jest.advanceTimersByTime(300);
+    });
+
+    await waitFor(() => {
+      const loadingElement = screen.getByText(/Loading results from Tv Maze/i);
+      expect(loadingElement).toBeInTheDocument();
+    });
   });
 
   it('displays results when results are present', async () => {
@@ -125,6 +137,9 @@ describe('SearchView', () => {
 
     userEvent.type(screen.getByLabelText(/search tv show/i), 'House');
 
-    await waitFor(() => expect(screen.getByText('House')).toBeInTheDocument());
+    await waitFor(() => {
+      const searchText = screen.getByText('House');
+      expect(searchText).toBeInTheDocument();
+    });
   });
 });
