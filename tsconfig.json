@@ -24,7 +24,8 @@
     "forceConsistentCasingInFileNames": true,
 
     /* types*/
-    "types": ["@testing-library/jest-dom"],
+    "typeRoots": ["../node_modules/@types", "./node_modules/@types", "@testing-library"],
+    "types": ["jest", "jest-dom"],
   },
   "include": ["src", "./setupTests.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { Alert, Box, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ResultsList from '../components/ResultsList';
@@ -8,7 +8,6 @@ import { fetchShows } from '../api/api-calls';
 
 const SearchView: React.FC = () => {
   const [query, setQuery] = useState<string>('');
-  const queryClient = useQueryClient();
   const theme = useTheme();
   const matchesMdUp = useMediaQuery(theme.breakpoints.up('md'));
 

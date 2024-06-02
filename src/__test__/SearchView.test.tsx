@@ -100,12 +100,12 @@ describe('SearchView', () => {
 
     await waitFor(() => userEvent.type(screen.getByLabelText(/search tv show/i), 'House'));
 
-    await waitFor(() => expect(screen.getByText(/an error occurred/i)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(/Something went wrong, details for support/i)).toBeInTheDocument());
   });
 
   it('displays initial search input', async () => {
     renderWithProviders(<SearchView />);
-    expect(screen.getByLabelText('Search tv show')).toBeInTheDocument();
+    expect(screen.getByLabelText('Search TV show of your choice...')).toBeInTheDocument();
   });
 
   it('displays loading text while fetching data', async () => {
@@ -115,17 +115,15 @@ describe('SearchView', () => {
 
     userEvent.type(screen.getByLabelText(/search tv show/i), 'House');
 
-    await waitFor(() => expect(screen.getByText('Laddar tv serie... ha tålamod')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(/Loading results from Tv Maze/i)).toBeInTheDocument());
   });
 
-  it('displays loading text then results when results are present', async () => {
+  it('displays results when results are present', async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: searchResultMockItem });
 
     renderWithProviders(<SearchView />);
 
     userEvent.type(screen.getByLabelText(/search tv show/i), 'House');
-
-    await waitFor(() => expect(screen.getByText('Laddar tv serie... ha tålamod')).toBeInTheDocument());
 
     await waitFor(() => expect(screen.getByText('House')).toBeInTheDocument());
   });

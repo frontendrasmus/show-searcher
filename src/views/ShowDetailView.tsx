@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Alert, Box, Button, CircularProgress, Grid, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, CircularProgress, Stack } from '@mui/material';
 import { fetchShowDetail } from '../api/api-calls';
 import { useQuery } from '@tanstack/react-query';
 
