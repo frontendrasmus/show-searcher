@@ -24,7 +24,7 @@
     "forceConsistentCasingInFileNames": true,
 
     /* types*/
-    "typeRoots": ["../node_modules/@types", "./node_modules/@types", "@testing-library"],
+    "typeRoots": ["../node_modules/@types", "./node_modules/@types", "../node_modules/@testing-library"],
     "types": ["jest", "jest-dom"],
   },
   "include": ["src", "./setupTests.ts"],
