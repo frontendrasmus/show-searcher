@@ -25,7 +25,7 @@
 
     /* types*/
     "typeRoots": ["../node_modules/@types", "./node_modules/@types", "../node_modules/@testing-library"],
-    "types": ["jest", "jest-dom"],
+    "types": ["jest"],
   },
   "include": ["src", "./setupTests.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]

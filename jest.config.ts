@@ -8,5 +8,5 @@ export default {
   moduleNameMapper: {
     '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__ mocks __/fileMock.js',
   },
-  setupFilesAfterEnv: ['./setupTests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
 };
