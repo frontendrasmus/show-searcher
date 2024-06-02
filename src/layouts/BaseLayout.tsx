@@ -8,24 +8,26 @@ function BaseLayout() {
       <Box
         sx={{
           width: '100vw',
-          height: '100vh',
+          height: 'calc(100vh)',
+          paddingTop: '2em',
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          bgcolor: '#e0447d', // Background color for the base container
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+          bgcolor: '#3f6e63',
         }}
       >
         <Container
           sx={{
-            bgcolor: '#fff', // Background color for the inner container
+            bgcolor: '#fff',
             maxWidth: {
-              xs: 'calc(100vw - 40px)', // 100vw minus 20px on each side for mobile
-              md: '600px', // Max width of 600px on desktop views
+              xs: 'calc(100vw - 40px)',
+              md: '600px',
             },
+            minHeight: 'calc(100vh - 4em)',
             width: '100%',
-            p: 2, // Padding of 20px
-            boxShadow: 3, // Adding some shadow
-            borderRadius: 2, // Adding border radius
+            p: 2,
+            boxShadow: 3,
+            borderRadius: 2,
           }}
         >
           <Outlet />
