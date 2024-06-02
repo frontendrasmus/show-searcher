@@ -5,7 +5,8 @@ This documentation outlines how you can install, run and run tests as well as so
 ## Installing dependencies
 
 1. Download and Install node latest LTS from [node](https://nodejs.org/en). the project is built using Node 20 for running npm scripts etc.
-2. Open a terminal of choice, and type the following.***
+2. Update NPM to a version 8 or above.
+2. Open a terminal of choice, and type the following.
 
 ``` shell script bash/zsh and similar
 npm run i
