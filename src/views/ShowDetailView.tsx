@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
+import { Alert, Box, Button, CircularProgress, Grid, Stack, Typography } from '@mui/material';
 import { fetchShowDetail } from '../api/api-calls';
 import { useQuery } from '@tanstack/react-query';
 
@@ -8,21 +8,23 @@ const ShowDetailView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { isPending, error, data } = useQuery({
+  const { isFetching, error, data } = useQuery({
     queryKey: ['show-detail', id],
     queryFn: () => {
       const showResult = fetchShowDetail(id as string);
       return showResult ?? null;
     },
+    retry: 3,
+    retryDelay: (attempt) => Math.pow(2, attempt) * 1000,
     enabled: !!id,
   });
-
-  if (isPending) {
+  console.log('data', data);
+  if (isFetching) {
     return (
       <Box>
-        <Grid container spacing={2} justifyContent="center">
+        <Stack spacing={2}>
           <CircularProgress />
-        </Grid>
+        </Stack>
       </Box>
     );
   }
@@ -30,22 +32,23 @@ const ShowDetailView: React.FC = () => {
   if (error) {
     return (
       <Box>
-        <Grid container spacing={2} justifyContent="center">
-          <Typography color="error">{error.message}</Typography>
-        </Grid>
+        <Stack spacing={2}>
+          <Button onClick={() => navigate(-1)}>Go back</Button>
+          <Alert severity="error">Something went wrong, details for support: {error.message}</Alert>
+        </Stack>
       </Box>
     );
-  }
+  } // <img src={data.image.medium} alt={data.name} />
 
   return (
     <Box>
-      <Grid container spacing={2} justifyContent="center">
+      <Stack spacing={2}>
         <Button onClick={() => navigate(-1)}>Go back</Button>
         <h1>{data.name}</h1>
-        {data.image && <img src={data.image.medium} alt={data.name} />}
+        {data.image && <Box component="img" alt="The house from the offer." src={data.image.original} />}
         <p dangerouslySetInnerHTML={{ __html: data.summary || '' }} />
-        <p>{data.language}</p>
-      </Grid>
+        <p>Language: {data.language}</p>
+      </Stack>
     </Box>
   );
 };

@@ -34,7 +34,7 @@ const SearchBox: React.FC<SearchBarProps> = ({ onSearch }) => {
     <Stack spacing={2}>
       <TextField
         id="search-tv-show"
-        label="Search tv show"
+        label="Search TV show of your choice..."
         variant="filled"
         type="text"
         value={query}

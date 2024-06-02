@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IShowSearchResult } from '../types';
-import { List, ListItem, ListItemText, Skeleton, Stack, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { List, ListItem, ListItemText, Skeleton, Stack, Typography, useMediaQuery } from '@mui/material';
 
 interface IResultsListProps {
   results: IShowSearchResult[] | [];
@@ -10,9 +11,10 @@ interface IResultsListProps {
 
 const ResultsList: React.FC<IResultsListProps> = ({ results, isBusy = false }) => {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const matchesMdUp = useMediaQuery(theme.breakpoints.up('md'));
   return (
     <List dense>
-      {!results?.length && !isBusy && <p>Seems like you have not tested the search yet? Why dont you try 'House'</p>}
       {results?.map((result, index) => (
         <ListItem key={`${result.show.name}__${index}`}>
           <ListItemText
@@ -20,7 +22,11 @@ const ResultsList: React.FC<IResultsListProps> = ({ results, isBusy = false }) =
             onClick={() => navigate(`/show/${result.show.id}`)}
             primary={result.show.name}
             secondary={
-              result.show?.rating?.average ? `betyg: ${result.show?.rating.average.toString()}` : 'inget betyg hittat'
+              matchesMdUp
+                ? result.show?.rating?.average
+                  ? `betyg: ${result.show?.rating.average.toString()}`
+                  : 'inget betyg hittat'
+                : null
             }
           />
         </ListItem>
@@ -28,7 +34,7 @@ const ResultsList: React.FC<IResultsListProps> = ({ results, isBusy = false }) =
       {isBusy && (
         <Stack spacing={2}>
           <Typography color="black" variant="h3" fontSize={18}>
-            Laddar tv serie... ha tålamod
+            Loading results from Tv Maze...
           </Typography>
           <Skeleton role="alert" variant="rectangular" height={24} />
           <Skeleton role="alert" variant="rectangular" height={24} />

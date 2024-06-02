@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Box, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
+import { Alert, Box, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ResultsList from '../components/ResultsList';
 import SearchBox from '../components/SearchBox';
@@ -18,6 +18,8 @@ const SearchView: React.FC = () => {
       const showsResult = fetchShows(query);
       return showsResult ?? null;
     },
+    retry: 3,
+    retryDelay: (attempt) => Math.pow(2, attempt) * 1000,
     enabled: !!query,
   });
 
@@ -28,7 +30,7 @@ const SearchView: React.FC = () => {
     setQuery(newQuery);
   };
 
-  const searchHeaderText = 'The Search Tv Ap2';
+  const searchHeaderText = 'Search TV shows super app';
 
   return (
     <Box>
@@ -37,12 +39,17 @@ const SearchView: React.FC = () => {
           <Stack spacing={2}>
             {matchesMdUp ? (
               <Typography color="black" variant="h1" fontSize={40}>
-                {searchHeaderText}
+                &#x1F4FA;&nbsp;{searchHeaderText}
               </Typography>
             ) : (
-              <Typography color="black" variant="h1" fontSize={28}>
-                {searchHeaderText}
-              </Typography>
+              <React.Fragment>
+                <Typography align="center" color="black" variant="button" fontSize={64}>
+                  &#x1F4FA;
+                </Typography>
+                <Typography align="center" color="black" variant="h1" fontSize={32}>
+                  {searchHeaderText}
+                </Typography>
+              </React.Fragment>
             )}
             <SearchBox onSearch={handleSearch} />
           </Stack>
@@ -50,7 +57,7 @@ const SearchView: React.FC = () => {
 
         <Grid item xs={12} minHeight={600}>
           {error ? (
-            <Typography color="error">An error occurred</Typography>
+            <Alert severity="error">Something went wrong, details for support: {error.message}</Alert>
           ) : data || (isFetching && isPending) ? (
             <ResultsList results={data} isBusy={isPending} />
           ) : null}
