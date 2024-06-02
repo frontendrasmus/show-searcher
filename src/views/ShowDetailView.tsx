@@ -18,7 +18,6 @@ const ShowDetailView: React.FC = () => {
     retryDelay: (attempt) => Math.pow(2, attempt) * 1000,
     enabled: !!id,
   });
-  console.log('data', data);
   if (isFetching) {
     return (
       <Box>

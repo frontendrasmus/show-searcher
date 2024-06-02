@@ -22,14 +22,11 @@ const SearchView: React.FC = () => {
     enabled: !!query,
   });
 
-  console.log(isPending, isFetching);
-
   const handleSearch = (newQuery: string) => {
-    console.log('handleSearch');
     setQuery(newQuery);
   };
 
-  const searchHeaderText = 'Search TV shows super app';
+  const searchHeaderText = 'Show Searcher';
 
   return (
     <Box>

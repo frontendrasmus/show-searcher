@@ -1,11 +1,11 @@
-# Show Searcher - An app where you can search shows on TV
+# Show Searcher - An app where you can search shows on TV, this is intended as a developer skills test
 
-This document outline how you can install the needed dependencies for the app, how to start it and how to runt the tests for the application.
+This documentation outlines how you can install, run and run tests as well as some reflections and comments that i managed to do in 5 hours and som future improvements if given time.
 
 ## Installing dependencies
 
 1. Download and Install node latest LTS from [node](https://nodejs.org/en). the project is built using Node 20 for running npm scripts etc.
-2. Open a terminal of choice, and type the following.
+2. Open a terminal of choice, and type the following.***
 
 ``` shell script bash/zsh and similar
 npm run i
@@ -19,6 +19,9 @@ Starting a local web server with react-refresh hot module reloading.
 npm run dev
 ```
 
+go to http://localhost:5173/
+Start searching, select and item in the list and click it to view details.
+
 ## Building the application
 
 Will create a bundle ready for production.
@@ -30,7 +33,7 @@ npm run build
 ## Testing the application
 
 ``` shell script bash/zsh and similar
-npm run test
+npm test
 ```
 
 ## What could have been improved in this app given more time than 5h?
