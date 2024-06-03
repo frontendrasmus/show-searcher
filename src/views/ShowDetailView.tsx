@@ -37,7 +37,7 @@ const ShowDetailView: React.FC = () => {
         </Stack>
       </Box>
     );
-  } // <img src={data.image.medium} alt={data.name} />
+  }
 
   return (
     <Box>
