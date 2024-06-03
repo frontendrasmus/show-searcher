@@ -45,11 +45,12 @@ Note! the commits with prefix AFTER COMPLETE: 'some text..' are additional featu
 
 1. Better handling of the actual detail of the TV series, now im just doing an id search in the /shows/id endpoint. There was IMDB ids etc that i could have used for more robust and up to date info on the tv series. This could have been indicated at the search level for the user to know that the specific search in IMDB db as well. This would have been perfect for an embedding. IF no IMDB or other TV db data exists i would have used TV maze info, then if no info at all show a message, "no more details regarding this series". Another solution would have been to indicate this directly in the search so the user can get more info at a early stage.
 2. Restore previous searches as a history, so the user can come back to a restored session/prev searches, possible google style as a dropdon on click in the input.
-3. More component tests, now im just testing the overall pages and not the component level.
-4. End to End test in a tool like Cypress to cover the entire user journey through the app and catch problem in the real end 'artifact', the actual code going to prod must be tested as well...
-5. More error handling in regards to react itself, such as Error Boundary in the router. I would also like to have implemented a global error handler for unhandled promise rejections and other things outside of react.
-6. More reusable layouts for the pages, no there is some duplication between SearchView and ShowDetailView, this could have been refactored into a inner layout, aka template for the pages to use.
-7. Better CSS structure, im using Material Design from MUI, styling is inlined in the actual components, this is not a good long term structure, and would have been hard to work with in a larger application.
-8. Possible Tailwind or SCSS if the app grows to be more efficient and have reusable styles.
-9. A custom theme for MUI, where brand identity and common grid layout paddings, margins, colors, gutters etc could have been defined.
-10. More solid typescript setup, especiallt with the tests, there where som glitched in the react testing library regarding types that i did not manage to sort out 100%.
+3. Separation of content into constants and later to i18n files for translation. Mixing content into code is never a good idea if the need to be edited later on and dynamically updated. 
+4. More component tests, now im just testing the overall pages and not the component level.
+5. End to End test in a tool like Cypress to cover the entire user journey through the app and catch problem in the real end 'artifact', the actual code going to prod must be tested as well...
+6. More error handling in regards to react itself, such as Error Boundary in the router. I would also like to have implemented a global error handler for unhandled promise rejections and other things outside of react.
+7. More reusable layouts for the pages, no there is some duplication between SearchView and ShowDetailView, this could have been refactored into a inner layout, aka template for the pages to use.
+8. Better CSS structure, im using Material Design from MUI, styling is inlined in the actual components, this is not a good long term structure, and would have been hard to work with in a larger application.
+9. Possible Tailwind or SCSS if the app grows to be more efficient and have reusable styles.
+10. A custom theme for MUI, where brand identity and common grid layout paddings, margins, colors, gutters etc could have been defined.
+11. More solid typescript setup, especiallt with the tests, there where som glitched in the react testing library regarding types that i did not manage to sort out 100%.
